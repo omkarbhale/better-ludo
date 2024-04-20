@@ -33,14 +33,11 @@ export class House {
         if (index === 11 && playerIndex === 1) {
             return 57;
         }
-        if (index === 11 && playerIndex === 1) {
-            return 57;
-        }
-        if (index === 24 && playerIndex === 2) {
-            return 62;
-        }
-        if (index === 37 && playerIndex === 3) {
+        if (index === 37 && playerIndex === 2) {
             return 67;
+        }
+        if (index === 24 && playerIndex === 3) {
+            return 62;
         }
         // Wrap around last tile
         if (index === 51) {

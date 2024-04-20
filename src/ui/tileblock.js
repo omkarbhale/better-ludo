@@ -23,10 +23,10 @@ export class TileBlock {
         if (tileIndex >= 57 && tileIndex <= 61) { // Player 2
             playerIndex = 1;
         }
-        if (tileIndex >= 62 && tileIndex <= 66) { // Player 2
+        if (tileIndex >= 67 && tileIndex <= 71) { // Player 2
             playerIndex = 2;
         }
-        if (tileIndex >= 67 && tileIndex <= 71) { // Player 2
+        if (tileIndex >= 62 && tileIndex <= 66) { // Player 3
             playerIndex = 3;
         }
         const tile = new Tile(tileIndex, playerIndex);
