@@ -14,16 +14,16 @@ export const PLAYER_COLORS = [
         marker: 'green',
     },
     {
-        primary: 'rgb(50, 0, 200)',
+        primary: 'rgb(50, 50, 200)',
         dark: 'darkblue',
         light: 'skyblue',
-        marker: 'blue',
+        marker: 'rgb(0,0,255)',
     },
     {
         primary: 'rgb(200, 200, 50)',
         dark: 'rgb(205,205,0)',
         light: 'rgb(255,255,100)',
-        marker: 'yellow',
+        marker: 'rgb(255,180,0)',
     },
 ];
 export const PLAYER_COUNT = PLAYER_COLORS.length;

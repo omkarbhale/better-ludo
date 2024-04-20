@@ -3,6 +3,7 @@ import { PlayerBlock } from "./playerblock.js";
 import { TileBlock } from "./tileblock.js";
 import { CenterBlock } from "./centerblock.js";
 import { Marker } from "./marker.js";
+import { House } from "./house.js";
 
 export class Board {
     constructor(container) {
@@ -14,8 +15,7 @@ export class Board {
         this.playerBlocks = this.initPlayerBlocks(PLAYER_COUNT);
         const tileBlocks = this.initTileBlocks();
         this.centerBlock = this.initCenterBlock();
-        this.markers = this.initMarkers(this.playerBlocks[0]);
-
+        
         this.element = document.createElement("div");
         this.element.classList.add("game-board");
 
@@ -28,9 +28,14 @@ export class Board {
         this.element.appendChild(this.playerBlocks[2].element);
         this.element.appendChild(tileBlocks[3].element);
         this.element.appendChild(this.playerBlocks[3].element);
-        this.element.appendChild(this.markers[0].element); // TODO
-
         this.container.appendChild(this.element);
+        
+        // Markers need the board to be rendered first
+        this.markers = this.initMarkers(this.playerBlocks);
+        // this.element.appendChild(this.markers[0].element); // TODO
+        this.markers.forEach(marker => {
+            this.element.appendChild(marker.element);
+        })
     }
 
     initPlayerBlocks() {
@@ -42,9 +47,14 @@ export class Board {
         return playerBlocks;
     }
 
-    initMarkers(playerBlock) {
-        const marker = new Marker(playerBlock.houses[0], 0);
-        return [marker];
+    initMarkers(playerBlocks) {
+        const markers = [];
+        for (let playerIndex = 0; playerIndex < playerBlocks.length; playerIndex++) {
+            for (let i = 0; i < 4; i++) {
+                markers.push(new Marker(House.houses[playerBlocks[playerIndex].houses[i].index], playerIndex, i, this));
+            }
+        }
+        return markers;
     }
 
     initCenterBlock() {

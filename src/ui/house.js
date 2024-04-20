@@ -8,6 +8,7 @@ export class House {
         }
     }
     static getNextHouseIndex(index, playerIndex) {
+        if (playerIndex === null) throw new Error("No player index specified");
         if (index === -1) {
             throw new Error("Index of -1 represents player has won! You can't get next house index from -1");
         }

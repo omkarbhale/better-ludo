@@ -29,7 +29,12 @@ export class TileBlock {
         if (tileIndex >= 62 && tileIndex <= 66) { // Player 3
             playerIndex = 3;
         }
-        const tile = new Tile(tileIndex, playerIndex);
+
+        let tileType = Tile.Types.NORMAL;
+        if ([8, 21, 34, 47].includes(tileIndex)) {
+            tileType = Tile.Types.SAFE;
+        }
+        const tile = new Tile(tileIndex, playerIndex, tileType);
         return tile;
     }
 }

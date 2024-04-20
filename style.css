@@ -15,6 +15,7 @@ body {
     position: relative;
     width: 100%;
     height: 100vh;
+    overflow: hidden;
 }
 
 .game-board {
@@ -46,6 +47,11 @@ body {
     justify-content: center;
     align-items: center;
     background-color: var(--color-primary);
+}
+.game-tile.safe {
+    background-image: url(/src/assets/star.png);
+    background-size: contain;
+    background-position: center center;
 }
 
 /* playerblock-------------------------------- */
@@ -84,10 +90,16 @@ body {
 
 /* Marker */
 .marker {
+    --top: 0px;
+    --left: 0px;
+    opacity: 0;
     width: var(--tile-size);
     height: var(--tile-size);
     display: grid;
     place-items: center;
     position: absolute;
     transform: translate(-50%, -50%) scale(1.5);
+    top: var(--top);
+    left: var(--left);
+    transition: all .1s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
