@@ -23,7 +23,6 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 1px solid rgba(128, 128, 128, 0.2);
     display: inline-grid;
     grid-template-columns: repeat(3, auto);
 }
@@ -81,4 +80,14 @@ body {
     place-items: center;
     background-color: var(--color-light);
     border: 1px solid black;
+}
+
+/* Marker */
+.marker {
+    width: var(--tile-size);
+    height: var(--tile-size);
+    display: grid;
+    place-items: center;
+    position: absolute;
+    transform: translate(-50%, -50%) scale(1.5);
 }
