@@ -4,7 +4,8 @@ export class House {
     static registerAsHouse(index, type, component) {
         House.houses[index] = {
             type: type,
-            component: component
+            component: component,
+            markers: [],
         }
     }
     static getNextHouseIndex(index, playerIndex) {

@@ -92,6 +92,7 @@ body {
 .marker {
     --top: 0px;
     --left: 0px;
+    --animation-duration: .15s;
     opacity: 0;
     width: var(--tile-size);
     height: var(--tile-size);
@@ -101,5 +102,22 @@ body {
     transform: translate(-50%, -50%) scale(1.5);
     top: var(--top);
     left: var(--left);
-    transition: all .1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition: all var(--animation-duration) cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.marker.jumping {
+    animation: jump var(--animation-duration) linear forwards;
+}
+@keyframes jump {
+    0% {
+        transform: translate(-50%, -50%) scale(1.5);
+    }
+    30% {
+        transform: translate(-50%, -50%) scale(2);
+    }
+    /* 80% {
+        transform: translate(-50%, -50%) scale(2.5);
+    } */
+    100% {
+        transform: translate(-50%, -50%) scale(1.5);;
+    }
 }

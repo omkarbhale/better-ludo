@@ -1,5 +1,6 @@
 import { PLAYER_COLORS } from "../constants.js";
 import { findCenterOf } from "../utils/dom.js";
+import { House } from "./house.js";
 
 export class Marker {
     static markers = [[], [], [], []];
@@ -8,14 +9,13 @@ export class Marker {
     }
 
     constructor(associatedHouse, playerIndex, markerIndex, board) {
-        this.associatedHouse = associatedHouse;
         this.playerIndex = playerIndex;
         this.markerIndex = markerIndex;
         this.board = board;
 
         Marker.markers[playerIndex][markerIndex] = this;
         this.initElement(playerIndex);
-        this.updateSelf();
+        this.setAssociatedHouse(associatedHouse);
     }
 
     async initElement(playerIndex) {
@@ -36,14 +36,33 @@ export class Marker {
         this.element.style.opacity = 1;
     }
 
-    setAssociatedHouse(associatedHouse) {
+    async setAssociatedHouse(associatedHouse) {
+        if (this.associatedHouse) {
+            const markerIndex = House.houses[this.associatedHouse.component.index].markers.indexOf(this);
+            if (markerIndex !== -1) {
+                House.houses[associatedHouse.component.index].markers.splice(markerIndex, 1);
+            } else {
+                throw new Error("Unreachable code");
+            }
+        }
         this.associatedHouse = associatedHouse;
-        this.updateSelf();
+        House.houses[this.associatedHouse.component.index].markers.push(this);
+        await this.updateSelf();
     }
 
     updateSelf() {
         const { x, y } = findCenterOf(this.associatedHouse.component.element, this.board.element);
         this.element.style.setProperty("--top", `${y}px`);
         this.element.style.setProperty("--left", `${x}px`);
+        return new Promise((res, rej) => {
+            this.element.addEventListener("animationend", (e) => {
+                if(e.animationName === 'jump') {
+                    this.element.classList.remove('jumping');
+                    res();
+                }
+            });
+            this.element.offsetWidth;
+            this.element.classList.add("jumping");
+        })
     }
 }

@@ -19,8 +19,9 @@ window.test = async (markerIndex=0, playerIndex=0) => {
             break;
         }
         const nextHouse = House.houses[nextHouseIndex];
-        marker.setAssociatedHouse(nextHouse);
+        await marker.setAssociatedHouse(nextHouse);
         await new Promise((res, rej) => setTimeout(res, 200));
+        if (Math.random() < .1) break;
     }
 }
 
